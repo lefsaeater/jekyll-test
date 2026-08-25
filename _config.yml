@@ -1,0 +1,29 @@
+title: Field Notes
+description: Essays and observations about design, technology, and the spaces between.
+url: "https://lefsaeater.github.io"
+baseurl: "/jekyll-test"
+lang: en
+timezone: UTC
+author:
+  name: lefsaeater
+  bio: Writing about thoughtful work, useful technology, and the details worth noticing.
+repository: lefsaeater/jekyll-test
+
+permalink: /writing/:title/
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor

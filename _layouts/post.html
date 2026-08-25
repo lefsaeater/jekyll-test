@@ -1,0 +1,42 @@
+---
+layout: default
+---
+
+<main id="main-content">
+  <article class="post">
+    <header class="post-header wrap wrap--narrow">
+      <a class="back-link" href="{{ '/' | relative_url }}"><span aria-hidden="true">&larr;</span> All writing</a>
+      <div class="post-meta">
+        <span>{{ page.category | default: "Notes" }}</span>
+        <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time>
+        {% assign words = content | number_of_words %}
+        <span>{{ words | divided_by: 220 | plus: 1 }} min read</span>
+      </div>
+      <h1>{{ page.title }}</h1>
+      {% if page.subtitle %}<p class="post-header__dek">{{ page.subtitle }}</p>{% endif %}
+    </header>
+
+    {% if page.image %}
+      <figure class="post-hero wrap">
+        <img src="{{ page.image }}" alt="{{ page.image_alt }}">
+        {% if page.image_caption %}<figcaption>{{ page.image_caption }}</figcaption>{% endif %}
+      </figure>
+    {% endif %}
+
+    <div class="post-content wrap wrap--prose">
+      {{ content }}
+    </div>
+
+    <footer class="post-footer wrap wrap--narrow">
+      <p class="eyebrow">Written by</p>
+      <div class="author-block">
+        <span class="author-block__monogram" aria-hidden="true">{{ site.author.name | slice: 0 | upcase }}</span>
+        <div>
+          <strong>{{ site.author.name }}</strong>
+          <p>{{ site.author.bio }}</p>
+        </div>
+      </div>
+      <a class="button button--dark" href="{{ '/archive/' | relative_url }}">More from the archive <span aria-hidden="true">&rarr;</span></a>
+    </footer>
+  </article>
+</main>

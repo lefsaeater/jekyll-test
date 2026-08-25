@@ -1,0 +1,59 @@
+---
+layout: default
+---
+
+{% assign featured = site.posts.first %}
+<main id="main-content" class="home">
+  <section class="hero"{% if featured.image %} style="--hero-image: url('{{ featured.image }}')"{% endif %}>
+    <div class="hero__shade"></div>
+    <div class="hero__content wrap">
+      <p class="eyebrow">Independent journal</p>
+      <h1>{{ site.title }}</h1>
+      <p class="hero__dek">{{ site.description }}</p>
+      {% if featured %}
+        <a class="hero__link" href="{{ featured.url | relative_url }}">
+          Read the latest <span aria-hidden="true">&rarr;</span>
+        </a>
+      {% endif %}
+    </div>
+    <p class="hero__caption">Notes for quieter, more considered work.</p>
+  </section>
+
+  <section class="latest wrap" aria-labelledby="latest-heading">
+    <div class="section-heading">
+      <h2 id="latest-heading">Latest writing</h2>
+      <a href="{{ '/archive/' | relative_url }}">View the archive <span aria-hidden="true">&rarr;</span></a>
+    </div>
+
+    <div class="post-grid">
+      {% for post in site.posts limit: 6 %}
+        <article class="post-card{% if forloop.first %} post-card--featured{% endif %}">
+          {% if post.image %}
+            <a class="post-card__image" href="{{ post.url | relative_url }}" tabindex="-1" aria-hidden="true">
+              <img src="{{ post.image }}" alt="" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}">
+            </a>
+          {% endif %}
+          <div class="post-card__body">
+            <div class="post-meta">
+              <span>{{ post.category | default: "Notes" }}</span>
+              <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+            </div>
+            <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+            <p>{{ post.excerpt | strip_html | truncatewords: 24 }}</p>
+            <a class="text-link" href="{{ post.url | relative_url }}" aria-label="Read {{ post.title }}">Read essay <span aria-hidden="true">&rarr;</span></a>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="newsletter">
+    <div class="newsletter__inner wrap">
+      <p class="eyebrow">Stay curious</p>
+      <h2>New notes, without the noise.</h2>
+      <p>Follow along in your favorite reader. Every post is available through the site feed.</p>
+      <a class="button" href="{{ '/feed.xml' | relative_url }}">Subscribe via RSS <span aria-hidden="true">&nearr;</span></a>
+    </div>
+  </section>
+</main>
+
